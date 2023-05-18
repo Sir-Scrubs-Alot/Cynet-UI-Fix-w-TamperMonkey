@@ -4,7 +4,7 @@
 // @version      0.1
 // @description  Modifies the width and overflow wrap of alerts panel body elements on a website
 // @author       Nate Bair
-// @match        https://usmssp.cynet.com/SitePages/Alerts
+// @match        https://<cynetTenant>/SitePages/Alerts
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=cynet.com
 // @grant        none
 // ==/UserScript==
