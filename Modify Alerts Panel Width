@@ -1,0 +1,42 @@
+// ==UserScript==
+// @name         Modify Alerts Panel Width
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  Modifies the width and overflow wrap of alerts panel body elements on a website
+// @author       Nate Bair
+// @match        https://usmssp.cynet.com/SitePages/Alerts
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=cynet.com
+// @grant        none
+// ==/UserScript==
+
+// define a style sheet. This is used so we can change the color of our button
+let styleSheet =`
+.wrapBtn {
+    background-color: black;
+}
+`;
+
+let s = document.createElement('style');
+s.type = "text/css";
+s.innerHTML = styleSheet;
+(document.head || document.documentElement).appendChild(s);
+
+
+// The windows.addEventListener is used so it waits for the webpage to fully load up before it runs the fucnction
+window.addEventListener('load', function() {
+    'use strict';
+    console.log("hello, world!"); // Just a message to verify that the script is working as intended
+
+    const p = document.getElementsByClassName("entitiesAmount")[0] // This will go on the alerts page. Note: You have to refresh the page for the WRAP button to appear.
+    const btn = document.createElement("button");
+    btn.innerHTML = "WRAP";
+    btn.className = "wrapBtn"; // we define a classname so we can call it out in our styleSheet
+    btn.onclick = () => { // we define what happens when the button is clicked
+        document.getElementsByClassName("alerts-bottom-small-panel-body")[0].style.width="600px"
+        document.getElementsByClassName("alerts-bottom-small-panel-body")[0].style.overflowWrap="break-word"
+        console.log("hello, world!");
+    }
+
+    p.insertBefore(document.createElement('br'), p.childNodes[0]);
+    p.insertBefore(btn, p.childNodes[0]);
+});
